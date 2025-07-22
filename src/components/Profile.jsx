@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 function Profile() {
   const [profile, setProfile] = useState({
-    fullName: 'John Advisor',
-    email: 'john.advisor@oldmutual.com',
+    fullName: 'Asanda Advisor',
+    email: 'Asanda.advisor@oldmutual.com',
     phone: '+27 11 123 4567',
     team: 'Johannesburg North'
   });
