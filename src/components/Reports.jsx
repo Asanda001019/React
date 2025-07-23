@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
 import { 
-  Clock, 
-  Calendar, 
-  Phone, 
-  Users, 
-  FileText, 
-  Target, 
-  Settings,
-  Plus,
-  Filter,
   Bell,
   User,
-  LogOut,
-  TrendingUp,
-  Activity,
-  CheckCircle,
   ChevronLeft
 } from 'lucide-react';
+import Sidebar from './Sidebar';
 import './Reports.css';
 
 function Reports() {
   // Mock navigation functions
-  const navigate = (path) => {
-    console.log(`Navigate to: ${path}`);
+  const navigate = (path, pageId) => {
+    console.log(`Navigate to: ${path}, Page ID: ${pageId}`);
   };
 
   const goToPage = (path) => navigate(path);
@@ -52,82 +40,8 @@ function Reports() {
 
   return (
     <div className="reports-container">
-      {/* Modern Sidebar */}
-      <div className="sidebar">
-        <div className="sidebar-content">
-          {/* Logo/Brand */}
-          <div className="brand-logo">
-            <div className="logo-icon">
-              <Activity className="icon" />
-            </div>
-            <div>
-              <h1 className="logo-title">ActivityHub</h1>
-              <p className="logo-subtitle">Financial Advisory</p>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <nav className="sidebar-nav">
-            <button 
-              onClick={() => goToPage('/dashboard')}
-              className="nav-button"
-            >
-              <TrendingUp className="nav-icon" />
-              <span>Dashboard</span>
-            </button>
-            <button 
-              onClick={() => goToPage('/dailyEntry')}
-              className="nav-button"
-            >
-              <Plus className="nav-icon" />
-              <span>Daily Entry</span>
-            </button>
-            <button 
-              onClick={() => goToPage('/appointments')}
-              className="nav-button"
-            >
-              <Calendar className="nav-icon" />
-              <span>Appointments</span>
-            </button>
-            <div className="nav-button active">
-              <FileText className="nav-icon" />
-              <span>View Reports</span>
-            </div>
-            <button className="nav-button">
-              <Phone className="nav-icon" />
-              <span>Call Tracker</span>
-            </button>
-            <button className="nav-button">
-              <Users className="nav-icon" />
-              <span>Clients</span>
-            </button>
-            <button className="nav-button">
-              <Settings className="nav-icon" />
-              <span>Settings</span>
-            </button>
-          </nav>
-        </div>
-
-        {/* User Profile */}
-        <div className="user-profile">
-          <div className="profile-card">
-            <div className="profile-info">
-              <div className="profile-avatar">AM</div>
-              <div>
-                <p className="profile-name">{advisor.fullName}</p>
-                <p className="profile-role">Financial Advisor</p>
-              </div>
-            </div>
-            <button 
-              onClick={() => navigate('/login')}
-              className="logout-button"
-            >
-              <LogOut className="logout-icon" />
-              <span>Logout</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Shared Sidebar */}
+      <Sidebar currentPage="reports" onNavigate={navigate} />
 
       {/* Main Content */}
       <div className="main-content">
@@ -135,7 +49,7 @@ function Reports() {
         <div className="content-header">
           <div>
             <button 
-              onClick={() => goToPage('/dashboard')}
+              onClick={() => navigate('/dashboard', 'dashboard')}
               className="back-button"
             >
               <ChevronLeft className="back-icon" />

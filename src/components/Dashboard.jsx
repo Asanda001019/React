@@ -1,27 +1,26 @@
 import React from 'react';
 import { 
   Clock, 
-  Calendar, 
-  Phone, 
-  Users, 
-  FileText, 
-  Target, 
-  Settings,
-  Plus,
-  Filter,
   Bell,
   User,
-  LogOut,
   TrendingUp,
-  Activity,
-  CheckCircle
+  CheckCircle,
+  Plus,
+  Calendar,
+  FileText,
+  Phone,
+  Users,
+  Filter
 } from 'lucide-react';
+import Sidebar from './Sidebar';
 import './Dashboard.css';
 
 function Dashboard() {
   // Mock navigation functions - replace with your actual useNavigate hook
-  const navigate = (path) => {
-    console.log(`Navigate to: ${path}`);
+  const navigate = (path, pageId) => {
+    console.log(`Navigate to: ${path}, Page ID: ${pageId}`);
+    // Here you would use your actual navigation logic
+    // For example: history.push(path) or navigate(path)
   };
 
   // Original data (keeping your structure)
@@ -32,91 +31,12 @@ function Dashboard() {
     { date: 'Yesterday', type: 'Phone Call', client: 'Sarah Johnson', status: 'Rescheduled' },
   ];
 
-  // Original functions (keeping your logic) - modify when implementing
-  const handleLogout = () => {
-    console.log('Logout clicked');
-  };
-
   const goToPage = (path) => navigate(path);
 
   return (
     <div className="dashboard-container">
-      {/* Modern Sidebar */}
-      <div className="sidebar">
-        <div className="sidebar-content">
-          {/* Logo/Brand */}
-          <div className="logo-brand">
-            <div className="logo-icon">
-              <Activity className="logo-icon-svg" />
-            </div>
-            <div>
-              <h1 className="logo-title">ActivityHub</h1>
-              <p className="logo-subtitle">Financial Advisory</p>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <nav className="nav-container">
-            <div className="nav-item-active">
-              <TrendingUp className="nav-icon" />
-              <span className="nav-text-active">Dashboard</span>
-            </div>
-            <button 
-              onClick={() => goToPage('/dailyEntry')}
-              className="nav-button"
-            >
-              <Plus className="nav-icon" />
-              <span>Daily Entry</span>
-            </button>
-            <button 
-              onClick={() => goToPage('/appointments')}
-              className="nav-button"
-            >
-              <Calendar className="nav-icon" />
-              <span>Appointments</span>
-            </button>
-            <button 
-              onClick={() => goToPage('/appointments')}
-              className="nav-button"
-            >
-              <FileText className="nav-icon" />
-              <span>View Reports</span>
-            </button>
-            <button className="nav-button">
-              <Phone className="nav-icon" />
-              <span>Call Tracker</span>
-            </button>
-            <button className="nav-button">
-              <Users className="nav-icon" />
-              <span>Clients</span>
-            </button>
-            <button className="nav-button">
-              <Settings className="nav-icon" />
-              <span>Settings</span>
-            </button>
-          </nav>
-        </div>
-
-        {/* User Profile */}
-        <div className="user-profile-container">
-          <div className="user-profile">
-            <div className="user-info">
-              <div className="user-avatar">AM</div>
-              <div className="user-details">
-                <p className="user-name">{advisor.fullName}</p>
-                <p className="user-role">Financial Advisor</p>
-              </div>
-            </div>
-            <button 
-              onClick={handleLogout}
-              className="logout-button"
-            >
-              <LogOut className="logout-icon" />
-              <span>Logout</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Shared Sidebar */}
+      <Sidebar currentPage="dashboard" onNavigate={navigate} />
 
       {/* Main Content */}
       <div className="main-content">
@@ -146,7 +66,7 @@ function Dashboard() {
           <h2 className="section-title">Quick Actions</h2>
           <div className="quick-actions-grid">
             <button 
-              onClick={() => goToPage('/dailyEntry')}
+              onClick={() => navigate('/dailyEntry', 'dailyEntry')}
               className="quick-action-card"
             >
               <div className="quick-action-icon blue">
@@ -157,7 +77,7 @@ function Dashboard() {
             </button>
 
             <button 
-              onClick={() => goToPage('/appointments')}
+              onClick={() => navigate('/appointments', 'appointments')}
               className="quick-action-card green"
             >
               <div className="quick-action-icon green">
@@ -168,7 +88,7 @@ function Dashboard() {
             </button>
 
             <button 
-              onClick={() => goToPage('/reports')}
+              onClick={() => navigate('/reports', 'reports')}
               className="quick-action-card purple"
             >
               <div className="quick-action-icon purple">
