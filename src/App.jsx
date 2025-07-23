@@ -28,6 +28,8 @@ function App() {
         <Route path='/appointments' element= {<Appointments/>} />
         <Route path='/reports' element= {<Reports/>} />
         <Route path='/profile' element= {<Profile/>} />
+
+        
         <Route path='/contracts' element= {<Contracts/>} />
         <Route path='/managerDashboard' element= {<ManagerDashboard/>} />
         <Route path='/teamReports' element= {<TeamReports/>} />
